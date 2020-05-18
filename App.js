@@ -4,6 +4,7 @@ import Constants from 'expo-constants';
 
 import contacts from './contacts'
 
+
 export default class App extends React.Component {
   state = {
     showContacts: false,
@@ -17,6 +18,15 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
+        <ScrollView>
+          {contacts.map(contact => (
+            <View key={contact.key}>
+              <Text>{contact.name}</Text>
+              <Text>{contact.phone}</Text>
+            </View>
+            
+          ))}
+        </ScrollView>
       </View>
     );
   }

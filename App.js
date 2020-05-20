@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, FlatList, StyleSheet, Text, View } from 'react-native';
+import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 
 import Row from './row';
@@ -12,7 +12,7 @@ export default class App extends React.Component {
     contacts: contacts
   }
   componentDidMount() {
-    console.log('contacts', contacts);
+    // console.log('contacts', contacts);
 
   }
 
@@ -21,10 +21,12 @@ export default class App extends React.Component {
   }
 
   sort = () => {
-    this.setState(prevState => ({contacts: prevState.contacts.sort(compareNames)}))
+    this.setState(prevState => ({contacts: [...prevState.contacts].sort(compareNames)}))
   }
 
-  renderItem= obj => <Row {...obj.item} />
+  renderItem = obj => <Row {...obj.item} />
+
+  renderSectionHeader = obj => <Text>{obj.section.title}</Text>
 
   render() {
     return (
@@ -32,11 +34,19 @@ export default class App extends React.Component {
         <Button title="toggle contacts" onPress={this.toggleContacts} />
         <Button title='sort' onPress={this.sort} />
         {this.state.showContacts &&
-          <FlatList
-            keyExtractor={item => item.key.toString()}
+          <SectionList 
             renderItem={this.renderItem}
-            data={this.state.contacts}
+            renderSectionHeader={this.renderSectionHeader}
+            sections={[{
+              title: 'A',
+              data: this.state.contacts,
+            }]}
           />
+          // <FlatList
+          //   keyExtractor={item => item.key.toString()}
+          //   renderItem={this.renderItem}
+          //   data={this.state.contacts}
+          // />
         }
       </View>
     );

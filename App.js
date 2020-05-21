@@ -2,32 +2,39 @@ import React from 'react';
 import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import ContactsList from './contactsList';
+import AddContactForm from './addContactForm';
 
 import contacts, { compareNames } from './contacts'
 
 export default class App extends React.Component {
   state = {
     showContacts: false,
-    contacts: contacts
+    showForm: false,
+    contacts: contacts,
   }
   componentDidMount() {
     // console.log('contacts', contacts);
 
   }
 
+  toggleForm = () => {
+    this.setState(prevState => ({showForm: !prevState.showForm}));
+  }
+
   toggleContacts = () => {
-    this.setState(prevState => ({showContacts: !prevState.showContacts}))
+    this.setState(prevState => ({showContacts: !prevState.showContacts}));
   }
 
   sort = () => {
-    this.setState(prevState => ({contacts: [...prevState.contacts].sort(compareNames)}))
+    this.setState(prevState => ({contacts: [...prevState.contacts].sort(compareNames)}));
   }
 
   render() {
+    if (this.state.showForm) return <AddContactForm />
     return (
       <View style={styles.container}>
         <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title='sort' onPress={this.sort} />
+        <Button title='Add Contact' onPress={this.toggleForm} />
         {this.state.showContacts &&
           <ContactsList
             contacts={this.state.contacts}

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, TextInput, View, KeyboardAvoidingView, Ke, Platform} from 'react-native';
+import { Button, StyleSheet, TextInput, View, KeyboardAvoidingView, Platform } from 'react-native';
 import PropTypes from 'prop-types';
 import Constants from 'expo-constants';
 

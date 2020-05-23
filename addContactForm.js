@@ -41,12 +41,20 @@ class AddContactForm extends React.Component {
         }
     }
 
+    getHandler = key => {
+        return val => {
+            this.setState({ [key]: val })
+        }
+    }
+
     handleNameChange = name => {
         this.setState({ name });
     }
 
     handlePhoneChange = phone => {
-        this.setState({ phone });
+        if ( +phone >= 0 && phone.length <= 10) {
+            this.setState({phone});
+        }
     }
 
     validateForm = () => {
@@ -70,7 +78,7 @@ class AddContactForm extends React.Component {
                 style={styles.container}>
 
                 <TextInput
-                    onChangeText={this.handleNameChange}
+                    onChangeText={this.getHandler('name')}
                     style={styles.input}
                     value={this.state.name}
                     placeholder='Name'

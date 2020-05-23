@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, StyleSheet, TextInput, View } from 'react-native';
+import { Button, StyleSheet, TextInput, View, KeyboardAvoidingView, Ke, Platform} from 'react-native';
 import PropTypes from 'prop-types';
 import Constants from 'expo-constants';
 
@@ -19,6 +19,7 @@ const styles = StyleSheet.create({
         flex: 1,
         paddingTop: Constants.statusBarHeight,
         backgroundColor: '#fff',
+        justifyContent: 'center',
     }
 })
 
@@ -45,9 +46,7 @@ class AddContactForm extends React.Component {
     }
 
     handlePhoneChange = phone => {
-        if ( +phone >= 0 && phone.length <= 10) {
-            this.setState({ phone });
-        }
+        this.setState({ phone });
     }
 
     validateForm = () => {
@@ -59,14 +58,17 @@ class AddContactForm extends React.Component {
     }
 
     handleSubmit = () => {
-        if ( +this.state.phone >= 0 && this.state.phone.length === 10 && this.state.name.length >= 3 ) {
-            this.props.onSubmit(this.state) //{name: this.state.name, phone: this.state.phone} or {...this.state}
-        }
+        
+        this.props.onSubmit(this.state) //{name: this.state.name, phone: this.state.phone} or {...this.state}
+        
     }
 
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView 
+                behavior={Platform.OS === "ios" ? "padding" : "height"}
+                style={styles.container}>
+
                 <TextInput
                     onChangeText={this.handleNameChange}
                     style={styles.input}
@@ -81,7 +83,7 @@ class AddContactForm extends React.Component {
                     placeholder='Phone'
                 />
                 <Button disabled={!this.state.isFormValid} onPress={this.handleSubmit} title='Submit Contact' />
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

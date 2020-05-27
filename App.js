@@ -1,51 +1,30 @@
 import React from 'react';
 import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
-import ContactsList from './contactsList';
-import AddContactForm from './addContactForm';
-
 import contacts, { compareNames } from './contacts'
+import { createSwitchNavigator } from 'react-navigation';
+import AddContactScreen from './screens/addContactScreen';
+import ContactListScreen from './screens/contactListScreen';
+
+const AppNavigator = createSwitchNavigator({
+  AddContact: AddContactScreen,
+  ContactList: ContactListScreen,
+}, {
+  initialRouteName: 'ContactList',
+})
+
 
 export default class App extends React.Component {
   state = {
-    showContacts: false,
-    showForm: false,
     contacts: contacts,
   }
 
   addContact = newContact => {
     this.setState(prevState => ({ showForm: false, contacts: [...prevState.contacts, newContact]}))
   }
-  componentDidMount() {
-    // console.log('contacts', contacts);
-
-  }
-
-  toggleForm = () => {
-    this.setState(prevState => ({showForm: !prevState.showForm}));
-  }
-
-  toggleContacts = () => {
-    this.setState(prevState => ({showContacts: !prevState.showContacts}));
-  }
-
-  sort = () => {
-    this.setState(prevState => ({contacts: [...prevState.contacts].sort(compareNames)}));
-  }
-
-  render() {
-    if (this.state.showForm) return <AddContactForm onSubmit={this.addContact} />
-    return (
-      <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title='Add Contact' onPress={this.toggleForm} />
-        {this.state.showContacts &&
-          <ContactsList
-            contacts={this.state.contacts}
-          />
-        }
-      </View>
-    );
+ 
+  render() { 
+    return <AppNavigator />
   }
 }
 

@@ -1,12 +1,16 @@
+import 'react-native-gesture-handler';
 import React from 'react';
 import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import contacts, { compareNames } from './contacts'
-import { createSwitchNavigator } from 'react-navigation';
+// import { createSwitchNavigator } from 'react-navigation';
 import AddContactScreen from './screens/addContactScreen';
 import ContactListScreen from './screens/contactListScreen';
 
-const AppNavigator = createSwitchNavigator({
+import { createStackNavigator } from '@react-navigation/stack';
+import { createCompatNavigatorFactory } from '@react-navigation/compat';
+
+const AppNavigator = createCompatNavigatorFactory(createStackNavigator)({
   AddContact: AddContactScreen,
   ContactList: ContactListScreen,
 }, {
@@ -24,7 +28,8 @@ export default class App extends React.Component {
   }
  
   render() { 
-    return <AppNavigator />
+    console.log('rendering')
+    return <AppNavigator  screenProps={{ contacts: this.state.contacts }} />
   }
 }
 

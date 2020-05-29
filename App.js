@@ -3,19 +3,20 @@ import React from 'react';
 import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
 import Constants from 'expo-constants';
 import contacts, { compareNames } from './contacts'
-// import { createSwitchNavigator } from 'react-navigation';
 import AddContactScreen from './screens/addContactScreen';
 import ContactListScreen from './screens/contactListScreen';
-
+import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { createCompatNavigatorFactory } from '@react-navigation/compat';
 
-const AppNavigator = createCompatNavigatorFactory(createStackNavigator)({
-  AddContact: AddContactScreen,
-  ContactList: ContactListScreen,
-}, {
-  initialRouteName: 'ContactList',
-})
+
+// const AppNavigator = createCompatNavigatorFactory(createStackNavigator)({
+//   AddContact: AddContactScreen,
+//   ContactList: ContactListScreen,
+// }, {
+//   initialRouteName: 'ContactList',
+// })
+
+const Stack = createStackNavigator();
 
 
 export default class App extends React.Component {
@@ -29,7 +30,21 @@ export default class App extends React.Component {
  
   render() { 
     console.log('rendering')
-    return <AppNavigator  screenProps={{ contacts: this.state.contacts }} />
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name='ContactList'
+            screenProps={{ contacts: this.state.contacts }}
+            component={ContactListScreen}
+          />
+          <Stack.Screen
+            name='AddContact'
+            component={AddContactScreen}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    )
   }
 }
 

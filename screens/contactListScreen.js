@@ -12,9 +12,9 @@ export default class ContactListScreen extends React.Component {
     showContacts: false,
   }
 
-  addContact = newContact => {
-    this.setState(prevState => ({ showForm: false, contacts: [...prevState.contacts, newContact]}))
-  }
+  // addContact = newContact => {
+  //   this.setState(prevState => ({ showForm: false, contacts: [...prevState.contacts, newContact]}))
+  // }
 
   showForm = () => {
       this.props.navigation.navigate('AddContact');
@@ -31,7 +31,7 @@ export default class ContactListScreen extends React.Component {
         <Button title='Add Contact' onPress={this.showForm} />
         {this.state.showContacts &&
           <ContactsList
-            contacts={this.props.screenProps.contacts}
+            contacts={this.props.contacts}
           />
         }
       </View>

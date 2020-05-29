@@ -32,16 +32,19 @@ export default class App extends React.Component {
     console.log('rendering')
     return (
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator
+          initialRouteName='ContactList'
+          headerMode='none'
+        >
           <Stack.Screen
             name='ContactList'
-            screenProps={{ contacts: this.state.contacts }}
-            component={ContactListScreen}
-          />
+            // component={ContactListScreen}
+            >{props => <ContactListScreen {...props} contacts={this.state.contacts} />}</Stack.Screen>
           <Stack.Screen
             name='AddContact'
-            component={AddContactScreen}
-          />
+            // component={AddContactScreen}
+            >{props => <AddContactScreen {...props} addContact={this.addContact} />}
+          </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>
     )

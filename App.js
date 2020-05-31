@@ -7,14 +7,7 @@ import AddContactScreen from './screens/addContactScreen';
 import ContactListScreen from './screens/contactListScreen';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-
-
-// const AppNavigator = createCompatNavigatorFactory(createStackNavigator)({
-//   AddContact: AddContactScreen,
-//   ContactList: ContactListScreen,
-// }, {
-//   initialRouteName: 'ContactList',
-// })
+import { TransitionSpecs } from '@react-navigation/stack';
 
 const Stack = createStackNavigator();
 
@@ -34,14 +27,29 @@ export default class App extends React.Component {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName='ContactList'
-          headerMode='none'
+          headerMode='float'
         >
           <Stack.Screen
             name='ContactList'
+            options={{
+              title: 'Contacts',
+              transitionSpec: {
+                open: TransitionSpecs.TransitionIOSSpec,
+                close: TransitionSpecs.TransitionIOSSpec,
+              },
+            }}
             // component={ContactListScreen}
             >{props => <ContactListScreen {...props} contacts={this.state.contacts} />}</Stack.Screen>
           <Stack.Screen
             name='AddContact'
+            options={{
+              title: 'Add Contact',
+              transitionSpec: {
+                open: TransitionSpecs.TransitionIOSSpec,
+                close: TransitionSpecs.TransitionIOSSpec,
+              },
+              
+            }}
             // component={AddContactScreen}
             >{props => <AddContactScreen {...props} addContact={this.addContact} />}
           </Stack.Screen>

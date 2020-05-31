@@ -9,7 +9,7 @@ import ContactsList from '../contactsList';
 
 export default class ContactListScreen extends React.Component {
   state = {
-    showContacts: false,
+    showContacts: true,
   }
 
   // addContact = newContact => {

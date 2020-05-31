@@ -8,6 +8,7 @@ const renderItem = obj => <Row {...obj.item} />
 const renderSectionHeader = obj => <Text>{obj.section.title}</Text>
 
 const ContactsList = (props) => {
+    
 
     const contactsByLetter = props.contacts.reduce((obj, contact) => {
         const firstLetter = contact.name[0].toUpperCase();

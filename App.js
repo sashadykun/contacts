@@ -54,16 +54,17 @@ export default class App extends React.Component {
             name='ContactList'
             options={({ navigation, route }) => ({ 
               headerTitle: () => <LogoTitle />,
-              headerRight: ({ navigate }) => <Button onPress={() => {navigation.navigate('AddContact')}} title='Add'></Button>,
+              headerRight: () => <Button onPress={() => {navigation.navigate('AddContact')}} title='Add'></Button>,
            })}
             // component={ContactListScreen}
             >{props => <ContactListScreen {...props} contacts={this.state.contacts} />}</Stack.Screen>
           <Stack.Screen
             name='AddContact'
             
-            options={{
+            options={({ navigation, route }) => ({
               title: 'Add Contact',
-            }}
+              headerLeft: () => <Button onPress={() => {navigation.navigate('ContactList')}} title='Back' ></Button>,
+            })}
             // component={AddContactScreen}
             >{props => <AddContactScreen {...props} addContact={this.addContact} />}
           </Stack.Screen>

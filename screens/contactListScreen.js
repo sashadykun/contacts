@@ -8,6 +8,11 @@ import ContactsList from '../contactsList';
 // import contacts, { compareNames } from '../contactsList'
 
 export default class ContactListScreen extends React.Component {
+
+  static navigationOptions = {
+    headerTitle: 'poprobuy'
+  };
+
   state = {
     showContacts: true,
   }

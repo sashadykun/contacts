@@ -35,7 +35,7 @@ export default class App extends React.Component {
   }
  
   render() { 
-    console.log('rendering', this.props.route)
+    // console.log('rendering', this.props.route)
     return (
       <NavigationContainer>
         <Stack.Navigator
@@ -48,7 +48,7 @@ export default class App extends React.Component {
             headerTintColor: '#aaa666',
             headerTitleStyle: {
               fontWeight: 'bold',
-            }
+            },
           }}
           // mode='modal'
         >
@@ -74,12 +74,11 @@ export default class App extends React.Component {
           </Stack.Screen>
           <Stack.Screen
             name='ContactDetails'
-            component={ContactDetailsScreen}
+            // component={ContactDetailsScreen}
             options={({ navigation, route }) => ({
               title: route.params.name,
-              // headerTitle: () => <Button onPress={() => {navigation.navigate('ContactList')}} title='Back' ></Button>,
             })}
-          >
+          >{props => <ContactDetailsScreen {...props} contacts={this.state.contacts} />}
           </Stack.Screen>
         </Stack.Navigator>
       </NavigationContainer>

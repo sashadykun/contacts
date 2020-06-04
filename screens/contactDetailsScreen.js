@@ -5,7 +5,22 @@ import { Button, Text, View } from 'react-native';
 export default class CreateDetailsScreen extends React.Component {
 
     goToRandom = () => {
-        // todo
+       const contacts = this.props.contacts;
+       console.log('contacts sss', contacts);
+       
+       const phone= this.props.route.params.phone;
+       let randomContact;
+        while (!randomContact) {
+            const randomIndex = Math.floor(Math.random() * contacts.length)
+            if (contacts[randomIndex].phone !== phone) {
+                randomContact = contacts[randomIndex];
+            }
+        }
+        console.log('randomContact', randomContact);
+        this.props.navigation.navigate('ContactDetails', {
+            name: randomContact.name,
+            phone: randomContact.phone,
+        })
     }
 
     render() {

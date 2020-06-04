@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, SectionList, FlatList, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import Constants from 'expo-constants';
 
 import ContactsList from '../contactsList';
@@ -8,10 +8,6 @@ import ContactsList from '../contactsList';
 // import contacts, { compareNames } from '../contactsList'
 
 export default class ContactListScreen extends React.Component {
-
-  static navigationOptions = {
-    headerTitle: 'poprobuy'
-  };
 
   state = {
     showContacts: true,
@@ -32,11 +28,16 @@ export default class ContactListScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Button title="toggle contacts" onPress={this.toggleContacts} />
-        <Button title='Add Contact' onPress={this.showForm} />
         {this.state.showContacts &&
           <ContactsList
             contacts={this.props.contacts}
+            onSelectContact={(contact) => {
+              // console.log('contact', contact)
+              this.props.navigation.navigate('ContactDetails', {
+                phone: contact.phone,
+                name: contact.name,
+              });
+            }}
           />
         }
       </View>

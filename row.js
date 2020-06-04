@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet } from 'react-native';
 import PropTypes from 'prop-types'
 
 const styles = StyleSheet.create({
@@ -11,12 +11,20 @@ const styles = StyleSheet.create({
     },
 })
 
-const Row = ({ name, phone }) => (
-    <View style={styles.row}>
-      <Text>{name}</Text>
-      <Text>{phone}</Text>
-    </View>
-)
+const Row = (props) => {
+    const currentContact = {
+        ...props
+    }
+    console.log('CurrentContact', currentContact);
+return (
+        <TouchableOpacity style={styles.row} onPress={() => {
+            props.onSelectContact({ ...props })
+        }}>
+        <Text>{props.name}</Text>
+        <Text>{props.phone}</Text>
+        </TouchableOpacity>
+    )
+}
 
 Row.propTypes = {
     name: PropTypes.string,

@@ -3,12 +3,13 @@ import { SectionList, Text } from 'react-native';
 import Row from './row';
 import PropTypes from 'prop-types'; //helps to self documment props
 
-const renderItem = obj => <Row {...obj.item} />
+
 
 const renderSectionHeader = obj => <Text>{obj.section.title}</Text>
 
 const ContactsList = (props) => {
     
+    const renderItem = ({ item }) => <Row {...item} onSelectContact={props.onSelectContact} />
 
     const contactsByLetter = props.contacts.reduce((obj, contact) => {
         const firstLetter = contact.name[0].toUpperCase();

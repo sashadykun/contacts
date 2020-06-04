@@ -15,7 +15,7 @@ const Row = (props) => {
     const currentContact = {
         ...props
     }
-    console.log('CurrentContact', currentContact);
+    // console.log('CurrentContact', currentContact);
 return (
         <TouchableOpacity style={styles.row} onPress={() => {
             props.onSelectContact({ ...props })

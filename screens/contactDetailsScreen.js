@@ -17,7 +17,7 @@ export default class CreateDetailsScreen extends React.Component {
             }
         }
         console.log('randomContact', randomContact);
-        this.props.navigation.navigate('ContactDetails', {
+        this.props.navigation.push('ContactDetails', {
             name: randomContact.name,
             phone: randomContact.phone,
         })
